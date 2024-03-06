@@ -30,6 +30,13 @@ class ListAgriModel extends BaseViewModel {
     notifyListeners();
   }
 ///dhdjhdjhj
+
+Future<void> refresh() async {
+  filteredagriList = (await ListAgriService().getAllCaneList()).cast<AgriListModel>();
+  notifyListeners();
+}
+
+
   void filterListBySeason({String? name}) async {
     caneSeasonFilter = name ?? caneSeasonFilter;
     notifyListeners();

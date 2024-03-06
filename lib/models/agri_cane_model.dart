@@ -45,20 +45,20 @@ class AgriCane {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['vendor_code'] = this.vendorCode;
-    data['route_km'] = this.routeKm;
-    data['grower_name'] = this.growerName;
-    data['grower_code'] = this.growerCode;
-    data['area'] = this.area;
-    data['crop_type'] = this.cropType;
-    data['crop_variety'] = this.cropVariety;
-    data['plantattion_ratooning_date'] = this.plantattionRatooningDate;
-    data['area_acrs'] = this.areaAcrs;
-    data['plant_name'] = this.plantName;
-    data['name'] = this.name;
-    data['soil_type'] = this.soilType;
-    data['season'] = this.season;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['vendor_code'] = vendorCode;
+    data['route_km'] = routeKm;
+    data['grower_name'] = growerName;
+    data['grower_code'] = growerCode;
+    data['area'] = area;
+    data['crop_type'] = cropType;
+    data['crop_variety'] = cropVariety;
+    data['plantattion_ratooning_date'] = plantattionRatooningDate;
+    data['area_acrs'] = areaAcrs;
+    data['plant_name'] = plantName;
+    data['name'] = name;
+    data['soil_type'] = soilType;
+    data['season'] = season;
     return data;
   }
 }

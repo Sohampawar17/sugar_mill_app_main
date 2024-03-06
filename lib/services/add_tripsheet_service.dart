@@ -166,7 +166,7 @@ class AddTripSheetServices {
       }
     } catch (e) {
       Logger().i(e);
-      Fluttertoast.showToast(msg: "Error while fetching user");
+      // Fluttertoast.showToast(msg: "Error while fetching user");
     }
     return null;
   }

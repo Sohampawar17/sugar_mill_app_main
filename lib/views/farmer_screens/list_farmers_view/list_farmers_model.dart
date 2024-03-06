@@ -24,6 +24,31 @@ class ListFarmersModel extends BaseViewModel {
     notifyListeners();
   }
 
+Future<void> refresh() async {
+   filteredList= await ListFarmersService().getAllFarmersList();
+  notifyListeners();
+}
+
+Color getColorForStatus(String status) {
+    switch (status) {
+    // Set the color for Draft status
+      case 'New':
+        return Colors.blueAccent.shade100; // Set the color for On Hold status
+      case 'Pending':
+        return Colors.redAccent.shade100; // Set the color for To Deliver and Bill status
+      case 'Pending For Agriculture Officer':
+        return Colors.redAccent.shade100; // Set the color for To Bill status
+      case 'Approved':
+        return Colors.green; // Set the color for To Deliver status
+      case 'Rejected':
+        return Colors.red.shade400; // Set the color for Completed status
+// Set the color for Cancelled status
+    // Set the color for Closed status
+      default:
+        return Colors.grey; // Set a default color for unknown status
+    }
+  }
+
   void onRowClick(BuildContext context, FarmersListModel? farmresList) {
     Navigator.pushNamed(
       context,

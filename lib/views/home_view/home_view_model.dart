@@ -26,6 +26,8 @@ class HomeViewModel extends BaseViewModel {
   String? checkvalue;
   String? time;
   String? sharedempid;
+   String? greeting;
+  String? imageurl;
 
   void logout(BuildContext context) async {
     final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
@@ -50,7 +52,8 @@ class HomeViewModel extends BaseViewModel {
         Navigator.pushNamed(context, Routes.loginViewScreen);
       }
     }
-
+handleGreeting();
+handleImage();
     empList = await CheckinServices().fetchmobile(mobile ?? "");
     empname = empList[0].employeeName;
     notifyListeners();
@@ -64,6 +67,29 @@ class HomeViewModel extends BaseViewModel {
     Logger().i(time);
   }
 
+
+ void handleGreeting() {
+    final now = DateTime.now();
+    final timeOfDay = now.hour;
+    if (timeOfDay < 12) {
+      greeting = "Good Morning,";
+    } else if (timeOfDay < 17) {
+      greeting = "Good Afternoon,";
+    } else {
+      greeting = "Good Evening,";
+    }
+  }
+  void handleImage() {
+    final now = DateTime.now();
+    final timeOfDay = now.hour;
+    if (timeOfDay < 12) {
+      imageurl = "assets/images/morning.png";
+    } else if (timeOfDay < 17) {
+      imageurl = "assets/images/afternoon.png";
+    } else {
+      imageurl = "assets/images/sunset.png";
+    }
+  }
   void checkin(BuildContext context) async {
     setBusy(true);
 

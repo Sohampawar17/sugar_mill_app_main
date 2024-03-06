@@ -244,7 +244,7 @@ Logger().i(response.realUri);
     try {
       var headers = {'Cookie': await getTocken()};
       var dio = Dio();
-      String url='$apiBaseUrl/api/resource/Cane Master?fields=["vendor_code","route_km","grower_name","grower_code","area","crop_type","crop_variety","plantattion_ratooning_date","area_acrs","plant_name","name","soil_type","season"]&filters=[["season","like","$season%"],["village","like","$village%"],["grower_code","like","$farmercode%"]]&limit_page_length=99999';
+      String url='$apiBaseUrl/api/resource/Cane Master?fields=["vendor_code","route_km","grower_name","grower_code","area","crop_type","crop_variety","plantattion_ratooning_date","area_acrs","plant_name","name","soil_type","season"]&filters=[["season","like","$season%"],["area","like","$village%"],["grower_code","like","$farmercode%"]]&limit_page_length=99999';
       Logger().i(url);
       var response = await dio.request(
         url,

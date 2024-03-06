@@ -5,10 +5,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:sugar_mill_app/models/cane_farmer.dart';
 import 'package:sugar_mill_app/models/cane_route.dart';
 import 'package:sugar_mill_app/services/add_cane_service.dart';
 import 'package:sugar_mill_app/services/geolocation_service.dart';
+import 'package:sugar_mill_app/views/cane_screens/list_cane_view/list_cane_screen.dart';
 import '../../../constants.dart';
 import '../../../models/cane.dart';
 import '../../../models/village_model.dart';
@@ -50,6 +52,7 @@ class CaneViewModel extends BaseViewModel {
   List<String> soilTypeList = [""];
   List<String> cropVarietyList = [""];
   late String caneId;
+  String? name;
   String? selectedVillage;
   String? selectedirrigationmethod;
   String? selectedirrigationsource;
@@ -118,6 +121,31 @@ class CaneViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+
+void showSuccessDialog(BuildContext context,String? name) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("$name plot registered successfully"),
+      
+        actions: [
+          TextButton(
+            onPressed: () {
+             Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const ListCaneScreen()),
+  ); // Close the dialog
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
   void onSavePressed(BuildContext context) async {
     setBusy(true);
 
@@ -158,15 +186,20 @@ class CaneViewModel extends BaseViewModel {
 
           if (isEdit == true) {
             res = await AddCaneService().updateCane(canedata);
-          } else {
-            res = await AddCaneService().addCane(canedata);
-          }
-
-          if (res) {
+              if (res) {
+                
             if (context.mounted) {
-              Navigator.pop(context);
+            Navigator.pop(context, const MaterialRoute(page: ListCaneScreen)); 
             }
           }
+          } else {
+            name = await AddCaneService().addCane(canedata);
+             if (name!.isNotEmpty) {
+    showSuccessDialog(context,name);
+    }
+          }
+
+        
         } else {
           // Handle case where placemark is null
           Fluttertoast.showToast(msg: 'Failed to get placemark');

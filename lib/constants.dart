@@ -34,7 +34,7 @@ String apiUploadFilePost = '$apiBaseUrl/api/method/upload_file';
 String apiSupplierList =
     '$apiBaseUrl/api/resource/Supplier?limit_page_length=999999999&fields=["name","supplier_name"]&filters=[["supplier_group","in",["Nursery","Drip"]]]';
 String apiFarmerAllListGet =
-    '$apiBaseUrl/api/resource/Farmer List?fields=["supplier_name","village","name","workflow_state","circle_office","existing_supplier_code"]&limit_page_length=30&order_by=workflow_state desc,creation desc&filters=[["workflow_state","in",["Pending","New","Approved"]]]';
+    '$apiBaseUrl/api/resource/Farmer List?fields=["supplier_name","village","name","workflow_state","circle_office","existing_supplier_code"]&limit_page_length=30&order_by=workflow_state desc,modified desc&filters=[["workflow_state","in",["Pending","Pending For Agriculture Officer","New","Approved"]]]';
 String apitFilterOnFarmerListGet =
     "$apiBaseUrl/api/resource/Farmer List?order_by=creation desc&limit_page_length=20&fields=[\"supplier_name\",\"village\",\"name\",\"circle_office\",\"existing_supplier_code\"]&filters=[[\"village\",  \"like\", \"bed%\" ],[\"supplier_name\",  \"like\", \"abhi%\" ]]";
 String apiLoginGet = '$apiBaseUrl/api/method/login';
@@ -77,7 +77,7 @@ String apifetchFarList =
     '$apiBaseUrl/api/resource/Farmer List?fields=["name","supplier_name","existing_supplier_code"]&filters=[["workflow_state","=","approved"]]&limit_page_length=9999999';
 String apifetchtripsheetData = '$apiBaseUrl/api/resource/Trip Sheet';
 String apifetchtripsheetsearch =
-    '$apiBaseUrl/api/resource/Trip Sheet?order_by=creation desc&fields=["name","farmer_name","field_village","transporter_name","circle_office","season"]&limit_page_length=9999999';
+    '$apiBaseUrl/api/resource/Trip Sheet?order_by=modified desc&fields=["name","farmer_name","field_village","transporter_name","circle_office","season"]&limit_page_length=9999999';
 
 ///functions
 Future<Map<String, String>> getTocken() async {

@@ -36,17 +36,17 @@ class CartInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['h_t_no'] = this.hTNo;
-    data['transporter'] = this.transporter;
-    data['transporter_name'] = this.transporterName;
-    data['transporter_code'] = this.transporterCode;
-    data['harvester'] = this.harvester;
-    data['harvester_code'] = this.harvesterCode;
-    data['harvester_name'] = this.harvesterName;
-    data['vehicle_type'] = this.vehicleType;
-    data['gang_type'] = this.gangType;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['h_t_no'] = hTNo;
+    data['transporter'] = transporter;
+    data['transporter_name'] = transporterName;
+    data['transporter_code'] = transporterCode;
+    data['harvester'] = harvester;
+    data['harvester_code'] = harvesterCode;
+    data['harvester_name'] = harvesterName;
+    data['vehicle_type'] = vehicleType;
+    data['gang_type'] = gangType;
     return data;
   }
 }

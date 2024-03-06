@@ -48,21 +48,21 @@ class DoseTypeModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['item_code'] = this.itemCode;
-    data['item_name'] = this.itemName;
-    data['baselqty'] = this.baselqty;
-    data['preearthqty'] = this.preearthqty;
-    data['earthingqty'] = this.earthingqty;
-    data['rainyqty'] = this.rainyqty;
-    data['ratoon_1qty'] = this.ratoon1qty;
-    data['ratoon_2qty'] = this.ratoon2qty;
-    data['qty'] = this.qty;
-    data['item_tax_temp'] = this.itemTaxTemp;
-    data['actual_qty'] = this.actualQty;
-    data['tax_number'] = this.taxNumber;
-    data['rate'] = this.rate;
-    data['weight_per_unit'] = this.weightPerUnit;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['item_code'] = itemCode;
+    data['item_name'] = itemName;
+    data['baselqty'] = baselqty;
+    data['preearthqty'] = preearthqty;
+    data['earthingqty'] = earthingqty;
+    data['rainyqty'] = rainyqty;
+    data['ratoon_1qty'] = ratoon1qty;
+    data['ratoon_2qty'] = ratoon2qty;
+    data['qty'] = qty;
+    data['item_tax_temp'] = itemTaxTemp;
+    data['actual_qty'] = actualQty;
+    data['tax_number'] = taxNumber;
+    data['rate'] = rate;
+    data['weight_per_unit'] = weightPerUnit;
     return data;
   }
 }

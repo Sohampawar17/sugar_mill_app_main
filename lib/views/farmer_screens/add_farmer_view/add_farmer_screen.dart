@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:sugar_mill_app/constants.dart';
@@ -394,13 +396,13 @@ class AddFarmerScreen extends StatelessWidget {
                             controller: model.dobController,
                             keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
-                              labelText: 'Date of Birth *',
+                              labelText: 'Date of Birth',
                               hintText: 'DD-MM-YYYY',
                               errorText: model.errorMessage.isNotEmpty
                                   ? model.errorMessage
                                   : null,
                             ),
-                            validator: model.validateDob,
+                            // validator: model.validateDob,
                             onChanged: model.onDobChanged,
                           ),
                         ),
@@ -409,9 +411,13 @@ class AddFarmerScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: TextFormField(
-                            readOnly: true,
+                             inputFormatters: [
+                                LengthLimitingTextInputFormatter(2),
+                            
+                              ],
+                              keyboardType: TextInputType.number,
                             controller: model.ageController,
-                            decoration: const InputDecoration(labelText: 'Age *'),
+                            decoration:  InputDecoration(labelText: 'Age',hintText: 'Enter the age',),
                             validator: (value) =>
                                 value!.isEmpty ? 'Please enter an age' : null,
                             onChanged: (value) =>
@@ -613,40 +619,46 @@ class AddFarmerScreen extends StatelessWidget {
                               columnSpacing: 12.0,
                               // ignore: deprecated_member_use
                               dataRowHeight: 40.0,
-                              columns: const [
-                                DataColumn(
+                              columns:  [
+                                const DataColumn(
                                   label: Text('Far.'),
                                 ),
-                                DataColumn(
+                                 if(model.role != "Slip Boy")
+                                const DataColumn(
                                   label: Text('Har.'),
                                 ),
-                                DataColumn(
+                                 if(model.role != "Slip Boy")
+                                const DataColumn(
                                   label: Text('Trans.'),
                                 ),
-                                DataColumn(
+                                 if(model.role != "Slip Boy")
+                                const DataColumn(
                                   label: Text('Drip'),
                                 ),
-                                DataColumn(
+                                 if(model.role != "Slip Boy")
+                                const DataColumn(
                                   label: Text('Nursery'),
                                 ),
-                                DataColumn(
-                                  label: Text('B. Name'),
+                                const DataColumn(
+                                  label: Text('Bank Name'),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Text('IFSC'),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Text('Acc. Number'),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Text('Bank Passbook'),
                                 ),
-                                DataColumn(
+                                if(model.farmerData.readOnlyCount!=1)
+                                const DataColumn(
                                   label: Text('Action'),
                                   // Add a new DataColumn for the button
                                   numeric: false,
                                 ),
-                                DataColumn(
+                                 if(model.farmerData.readOnlyCount!=1)
+                                const DataColumn(
                                   label: Text('Delete'),
                                   // Add a new DataColumn for the button
                                   numeric: false,
@@ -667,6 +679,7 @@ class AddFarmerScreen extends StatelessWidget {
                                         );
                                       },
                                     )),
+                                     if(model.role != "Slip Boy")
                                     DataCell(Checkbox(
                                       value:
                                           model.bankAccounts[index].harvester ==
@@ -676,6 +689,7 @@ class AddFarmerScreen extends StatelessWidget {
                                             "Harvester", newValue ?? false);
                                       },
                                     )),
+                                     if(model.role != "Slip Boy")
                                     DataCell(Checkbox(
                                       value: model.bankAccounts[index]
                                               .transporter ==
@@ -685,6 +699,7 @@ class AddFarmerScreen extends StatelessWidget {
                                             "Transporter", newValue ?? false);
                                       },
                                     )),
+                                     if(model.role != "Slip Boy")
                                     DataCell(Checkbox(
                                       value: model.bankAccounts[index]
                                           .drip ==
@@ -694,6 +709,7 @@ class AddFarmerScreen extends StatelessWidget {
                                             "Drip", newValue ?? false);
                                       },
                                     )),
+                                     if(model.role != "Slip Boy")
                                     DataCell(Checkbox(
                                       value: model.bankAccounts[index]
                                           .nursery ==
@@ -761,6 +777,7 @@ class AddFarmerScreen extends StatelessWidget {
                                     // DataCell(Text(model
                                     //     .bankAccounts[index].
                                     //     .toString())),
+                                     if(model.farmerData.readOnlyCount!=1)
                                     DataCell(
                                       SizedBox(
                                         height: 24.0,
@@ -773,6 +790,7 @@ class AddFarmerScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                     if(model.farmerData.readOnlyCount!=1)
                                     DataCell(IconButton(
                                       onPressed: () {
                                         showDialog(
@@ -815,6 +833,7 @@ class AddFarmerScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
+                     if(model.farmerData.readOnlyCount!=1)
                     ElevatedButton(
                       onPressed: () => getBankDetails(context, model, -1),
                       child: const Text('Add Bank Account *'),
@@ -862,201 +881,224 @@ class AddFarmerScreen extends StatelessWidget {
           builder: (context) {
             return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
-                child: AlertDialog(
-                  title: const Text('Add Bank Account'),
-                  content: SizedBox(
-                    height: getHeight(context) / 1.5,
-                    child: Form(
-                      key: model.bankformKey,
-                      child: Column(
-                        children: [
-
-                          CheckboxListTile(
-                            title: const Text("Farmer"),
-                            value: model.farmer,
-                            onChanged: (bool? newValue) {
-                              setState(() =>
-                                  model.setRole("Farmer", newValue ?? false));
-                            },
-                          ),
-                          CheckboxListTile(
-                            title: const Text("Harvester"),
-                            value: model.harvester,
-                            onChanged: (bool? newValue) {
-                              setState(() => model.setRole(
-                                  "Harvester", newValue ?? false));
-                            },
-                          ),
-                          CheckboxListTile(
-                            title: const Text("Transporter"),
-                            value: model.transporter,
-                            onChanged: (bool? newValue) {
-                              setState(() => model.setRole(
-                                  "Transporter", newValue ?? false));
-                            },
-                          ),
-                          CheckboxListTile(
-                            title: const Text("Drip"),
-                            value: model.drip,
-                            onChanged: (bool? newValue) {
-                              setState(() => model.setRole(
-                                  "Drip", newValue ?? false));
-                            },
-                          ),
-                          CheckboxListTile(
-                            title: const Text("Nursery"),
-                            value: model.nursery,
-                            onChanged: (bool? newValue) {
-                              setState(() => model.setRole(
-                                  "Nursery", newValue ?? false));
-                            },
-                          ),
-                          Expanded(
-                            child: Autocomplete<String>(
-                              key: Key(index == -1
-                                  ? ""
-                                  : model.bankAccounts[index].bankName ?? ""),
-                              initialValue: TextEditingValue(
-                                  text: index == -1
-                                      ? ""
-                                      : model.bankAccounts[index].bankName ??
-                                          ""),
-                              optionsBuilder:
-                                  (TextEditingValue textEditingValue) {
-                                if (textEditingValue.text.isEmpty) {
-                                  return const Iterable<String>.empty();
-                                }
-                                return model.bankList
-                                    .map((bank) => bank.bankAndBranch ?? "")
-                                    .toList()
-                                    .where((bank) => bank
-                                        .toLowerCase()
-                                        .contains(textEditingValue.text
-                                            .toLowerCase()));
-                              },
-                              onSelected: (String routeName) {
-                                // Find the corresponding route object
-                                final bankData = model.bankList.firstWhere(
-                                    (bank) => bank.bankAndBranch == routeName);
-                                model.setSelectedBank(
-                                    bankData); // Pass the route
-                              },
-                              fieldViewBuilder: (BuildContext context,
-                                  TextEditingController textEditingController,
-                                  FocusNode focusNode,
-                                  VoidCallback onFieldSubmitted) {
-                                return TextFormField(
-                                  controller: textEditingController,
-                                  focusNode: focusNode,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Bank',
+              return  SingleChildScrollView(
+                  child: AlertDialog(
+                    title: const Text('Add Bank Account'),
+                    content:model.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SizedBox(
+                      height: getHeight(context) / 1.5,
+                      child: Form(
+                        key: model.bankformKey,
+                        child: Column(
+                          children: [
+                
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CheckboxListTile(
+                                    title: const Text("Far."),
+                                    value: model.farmer,
+                                    onChanged: (bool? newValue) {
+                                      setState(() =>
+                                          model.setRole("Farmer", newValue ?? false));
+                                    },
                                   ),
-                                  onChanged: (String value) {},
-                                );
+                                ),
+                                if(model.role != "Slip Boy")
+                                Expanded(
+                                  child: CheckboxListTile(
+                                                              title: const Text("Har"),
+                                                              value: model.harvester,
+                                                              onChanged: (bool? newValue) {
+                                  setState(() => model.setRole(
+                                      "Harvester", newValue ?? false));
+                                                              },
+                                                            ),
+                                ),
+                              ],
+                            ),
+                            
+                            Row(
+                              children: [
+                                  if(model.role != "Slip Boy")
+                                Expanded(
+                                  child: CheckboxListTile(
+                                    title: const Text("Tra"),
+                                    value: model.transporter,
+                                    onChanged: (bool? newValue) {
+                                      setState(() => model.setRole(
+                                          "Transporter", newValue ?? false));
+                                    },
+                                  ),
+                                ),
+                                  if(model.role != "Slip Boy")
+                                  Expanded(
+                                    child:CheckboxListTile(
+                              title: const Text("Nur"),
+                              value: model.nursery,
+                              onChanged: (bool? newValue) {
+                                setState(() => model.setRole(
+                                    "Nursery", newValue ?? false));
                               },
-                              optionsViewBuilder: (BuildContext contpext,
-                                  AutocompleteOnSelected<String> onSelected,
-                                  Iterable<String> options) {
-                                return Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Material(
-                                    elevation: 4.0,
-                                    child: Container(
-                                      constraints:
-                                          const BoxConstraints(maxHeight: 200),
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: options.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final String option =
-                                              options.elementAt(index);
-                                          return GestureDetector(
-                                            onTap: () {
-                                              onSelected(option);
-                                            },
-                                            child: ListTile(
-                                              title: Text(option),
-                                            ),
-                                          );
-                                        },
+                            ),
+                                  ),
+                              ],
+                            ),
+                            if(model.role != "Slip Boy")
+                            CheckboxListTile(
+                                                                title: const Text("Drip"),
+                                                                value: model.drip,
+                                                                onChanged: (bool? newValue) {
+                                                                  setState(() => model.setRole(
+                                      "Drip", newValue ?? false));
+                                                                },
+                                                              ),
+                            Expanded(
+                              child: Autocomplete<String>(
+                                key: Key(index == -1
+                                    ? ""
+                                    : model.bankAccounts[index].bankName ?? ""),
+                                initialValue: TextEditingValue(
+                                    text: index == -1
+                                        ? ""
+                                        : model.bankAccounts[index].bankName ??
+                                            ""),
+                                optionsBuilder:
+                                    (TextEditingValue textEditingValue) {
+                                  if (textEditingValue.text.isEmpty) {
+                                    return const Iterable<String>.empty();
+                                  }
+                                  return model.bankList
+                                      .map((bank) => bank.bankAndBranch ?? "")
+                                      .toList()
+                                      .where((bank) => bank
+                                          .toLowerCase()
+                                          .contains(textEditingValue.text
+                                              .toLowerCase()));
+                                },
+                                onSelected: (String routeName) {
+                                  // Find the corresponding route object
+                                  final bankData = model.bankList.firstWhere(
+                                      (bank) => bank.bankAndBranch == routeName);
+                                  model.setSelectedBank(
+                                      bankData); // Pass the route
+                                },
+                                fieldViewBuilder: (BuildContext context,
+                                    TextEditingController textEditingController,
+                                    FocusNode focusNode,
+                                    VoidCallback onFieldSubmitted) {
+                                  return TextFormField(
+                                    controller: textEditingController,
+                                    focusNode: focusNode,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Bank',
+                                    ),
+                                    onChanged: (String value) {},
+                                  );
+                                },
+                                optionsViewBuilder: (BuildContext contpext,
+                                    AutocompleteOnSelected<String> onSelected,
+                                    Iterable<String> options) {
+                                  return Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Material(
+                                      elevation: 4.0,
+                                      child: Container(
+                                        constraints:
+                                            const BoxConstraints(maxHeight: 200),
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: options.length,
+                                          itemBuilder:
+                                              (BuildContext context, int index) {
+                                            final String option =
+                                                options.elementAt(index);
+                                            return GestureDetector(
+                                              onTap: () {
+                                                onSelected(option);
+                                              },
+                                              child: ListTile(
+                                                title: Text(option),
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                              optionsMaxHeight: 200,
-                            ),
-                          ),
-                          Expanded(
-                            child: TextFormField(
-                              initialValue:
-                                  index == -1 ? null : model.accountNumber,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(15),
-                                UppercaseTextFormatter()
-                              ],
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: 'Account Number',
+                                  );
+                                },
+                                optionsMaxHeight: 200,
                               ),
-                              onChanged: (value) {
-                                model.accountNumber = value;
-                              },
-                              validator: model.validateAccountNumber,
                             ),
-                          ),
-                          Visibility(
-                            visible: model.branchifscCode != "",
-                            child: Expanded(
+                            Expanded(
                               child: TextFormField(
-                                readOnly: true,
-                                initialValue: model.branchifscCode,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(11),
-                                  UppercaseTextFormatter(),
-                                ],
+                                initialValue:
+                                    index == -1 ? null : model.accountNumber,
+                                
+                                keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
-                                  labelText: 'Branch IFSC Code',
+                                  labelText: 'Account Number *',
                                 ),
                                 onChanged: (value) {
-                                  model.branchifscCode = value;
+                                  model.accountNumber = value;
                                 },
-                                validator: model.validateBranchIfscCode,
+                                validator: model.validateAccountNumber,
                               ),
                             ),
-                          ),
-                          Expanded(
-                              child: ElevatedButton(
-                            onPressed: () =>
-                                pickDocforpassbook(kBankpdf, context, model),
-                            child: model.passbookattch != ""
-                                ? Text(
-                                    'Passbook: ${model.passbookattch.split('/').last}',
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                                : const Text('Attach Passbook'),
-                          )),
-                        ],
+                            Visibility(
+                              visible: model.branchifscCode != "",
+                              child: Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: model.branchifscCode,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(11),
+                                    UppercaseTextFormatter(),
+                                  ],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Branch IFSC Code',
+                                  ),
+                                  onChanged: (value) {
+                                    model.branchifscCode = value;
+                                  },
+                                  validator: model.validateBranchIfscCode,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                child: ElevatedButton(
+                              onPressed: () =>
+                                  pickDocforpassbook(kBankpdf, context, model),
+                              child: model.passbookattch != ""
+                                  ? Text(
+                                      'Passbook: ${model.passbookattch.split('/').last}',
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  : const Text('Attach Passbook',),
+                            )),
+                          ],
+                        ),
                       ),
                     ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancel',style: TextStyle(color: Colors.redAccent),),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          model.validateForm(context, index);
+                        },
+                        child: model.isLoading?const CircularProgressIndicator(): const Text('Add',style: TextStyle(color: Colors.green),),
+                      ),
+                    ],
                   ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        model.validateForm(context, index);
-                      },
-                      child: const Text('Add'),
-                    ),
-                  ],
-                ),
+                
               );
             });
           },

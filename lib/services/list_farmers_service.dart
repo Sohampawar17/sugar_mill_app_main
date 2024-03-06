@@ -71,11 +71,12 @@ class ListFarmersService {
 
   Future<List<FarmersListModel>> getFarmersListByNameFilter(
       String name, String village) async {
+        var url="";
     try {
       var headers = {'Cookie': await getTocken()};
       var dio = Dio();
       var response = await dio.request(
-        "$apiBaseUrl/api/resource/Farmer List?fields=[\"supplier_name\",\"village\",\"name\",\"circle_office\",\"existing_supplier_code\",\"workflow_state\"]&filters=[[\"village\",  \"like\", \"$village%\" ],[\"supplier_name\",  \"like\", \"%$name%\" ]]",
+        "$apiBaseUrl/api/resource/Farmer List?fields=[\"supplier_name\",\"village\",\"name\",\"circle_office\",\"existing_supplier_code\",\"workflow_state\"]&filters=[[\"village\",  \"like\", \"$village%\" ],[\"supplier_name\",  \"like\", \"%$name%\" ]]&limit_page_length=9999999",
         options: Options(
           method: 'GET',
           headers: headers,

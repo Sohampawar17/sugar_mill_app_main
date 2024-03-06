@@ -10,9 +10,9 @@ class Employee {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['employee_name'] = this.employeeName;
-    data['name'] = this.name;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['employee_name'] = employeeName;
+    data['name'] = name;
     return data;
   }
 }

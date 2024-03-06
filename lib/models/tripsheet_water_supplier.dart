@@ -12,10 +12,10 @@ class WaterSupplierList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['supplier_name'] = this.supplierName;
-    data['existing_supplier_code'] = this.existingSupplierCode;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['supplier_name'] = supplierName;
+    data['existing_supplier_code'] = existingSupplierCode;
     return data;
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:sugar_mill_app/models/cane_farmer.dart';
+import 'package:sugar_mill_app/models/list_crop_sampling_model.dart';
 import 'package:sugar_mill_app/models/sampling_formula.dart';
 import 'package:sugar_mill_app/models/village_model.dart';
 import 'package:sugar_mill_app/services/add_crop_sampling_service.dart';
@@ -45,8 +47,11 @@ class AddCropSmaplingModel extends BaseViewModel {
       brixtopController.text = cropsamplingdata.brixTop?.toStringAsFixed(0) ?? "";
       noofpairsController.text = cropsamplingdata.noOfPairs?.toStringAsFixed(0) ?? "";
       for (AgriCane i in plotList) {
+         Logger().i(i.growerCode);
         if (i.growerCode == cropsamplingdata.growerCode) {
           selectedfarcode = i.vendorCode;
+          Logger().i(selectedfarcode);
+          
           notifyListeners();
         }
       }
@@ -74,7 +79,7 @@ class AddCropSmaplingModel extends BaseViewModel {
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+             Navigator.pop(context, const MaterialRoute(page: ListSampling)); 
           }
         }
       } else {
@@ -83,7 +88,7 @@ class AddCropSmaplingModel extends BaseViewModel {
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+            Navigator.pop(context, const MaterialRoute(page: ListSampling)); 
           }
         }
       }
@@ -182,9 +187,9 @@ void setSelectedVillage(BuildContext context,String? village) async {
           backgroundColor: Colors.red,
           content: Text(
             'There is no Grower available for ${cropsamplingdata.area}',
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
-          duration: Duration(seconds: 3), // Adjust the duration as needed
+          duration: const Duration(seconds: 3), // Adjust the duration as needed
         ),
       );
     }
@@ -303,9 +308,9 @@ String? selectedgrowername;
           backgroundColor: Colors.red,
           content: Text(
             'There is no plot available for ${cropsamplingdata.growerName}',
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
-          duration: Duration(seconds: 3), // Adjust the duration as needed
+          duration: const Duration(seconds: 3), // Adjust the duration as needed
         ),
       );
     }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:sugar_mill_app/models/trip_crop_harvesting_model.dart';
 import 'package:sugar_mill_app/models/tripsheet.dart';
+import 'package:sugar_mill_app/views/tripsheet_screen/add_tripsheet_list/add_tripsheet_list_model.dart';
 import '../../../constants.dart';
 import '../../../models/cane_route.dart';
 import '../../../models/cartlist.dart';
@@ -86,7 +88,7 @@ class AddTripSheetModel extends BaseViewModel {
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+            Navigator.pop(context, const MaterialRoute(page: ListTripsheet)); 
           }
         }
       } else {
@@ -95,7 +97,7 @@ class AddTripSheetModel extends BaseViewModel {
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+           Navigator.pop(context, const MaterialRoute(page: ListTripsheet)); 
           }
         }
       }

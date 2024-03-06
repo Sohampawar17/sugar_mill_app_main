@@ -39,18 +39,18 @@ class TransportInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['old_no'] = this.oldNo;
-    data['transporter_name'] = this.transporterName;
-    data['transporter_code'] = this.transporterCode;
-    data['harvester_code'] = this.harvesterCode;
-    data['harvester_name'] = this.harvesterName;
-    data['vehicle_type'] = this.vehicleType;
-    data['vehicle_no'] = this.vehicleNo;
-    data['trolly_1'] = this.trolly1;
-    data['trolly_2'] = this.trolly2;
-    data['gang_type'] = this.gangType;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['old_no'] = oldNo;
+    data['transporter_name'] = transporterName;
+    data['transporter_code'] = transporterCode;
+    data['harvester_code'] = harvesterCode;
+    data['harvester_name'] = harvesterName;
+    data['vehicle_type'] = vehicleType;
+    data['vehicle_no'] = vehicleNo;
+    data['trolly_1'] = trolly1;
+    data['trolly_2'] = trolly2;
+    data['gang_type'] = gangType;
     return data;
   }
 }

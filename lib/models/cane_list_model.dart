@@ -30,15 +30,15 @@ class CaneListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['plantation_status'] = this.plantationStatus;
-    data['route_name'] = this.routeName;
-    data['crop_variety'] = this.cropVariety;
-    data['name'] = this.name;
-    data['grower_code'] = this.growerCode;
-    data['grower_name'] = this.growerName;
-    data['plantattion_ratooning_date'] = this.plantattionRatooningDate;
-    data['survey_number'] = this.surveyNumber;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['plantation_status'] = plantationStatus;
+    data['route_name'] = routeName;
+    data['crop_variety'] = cropVariety;
+    data['name'] = name;
+    data['grower_code'] = growerCode;
+    data['grower_name'] = growerName;
+    data['plantattion_ratooning_date'] = plantattionRatooningDate;
+    data['survey_number'] = surveyNumber;
     return data;
   }
 }

@@ -30,15 +30,15 @@ class FertilizerItemList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['item_name'] = this.itemName;
-    data['item_code'] = this.itemCode;
-    data['weight_per_unit'] = this.weightPerUnit;
-    data['item_tax_temp'] = this.itemTaxTemp;
-    data['tax_number'] = this.taxNumber;
-    data['actual_qty'] = this.actualQty;
-    data['rate'] = this.rate;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['item_name'] = itemName;
+    data['item_code'] = itemCode;
+    data['weight_per_unit'] = weightPerUnit;
+    data['item_tax_temp'] = itemTaxTemp;
+    data['tax_number'] = taxNumber;
+    data['actual_qty'] = actualQty;
+    data['rate'] = rate;
     return data;
   }
 }

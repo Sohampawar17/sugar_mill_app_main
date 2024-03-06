@@ -246,7 +246,7 @@ class AddCropSamplingScreen extends StatelessWidget {
                                       "supplier"),
                               readOnly: true,
                               initialValue: model.selectedfarcode ??
-                                  model.cropsamplingdata.growerCode,
+                                  "",
                               decoration: const InputDecoration(
                                 labelText: 'Grower Code',
                               ),

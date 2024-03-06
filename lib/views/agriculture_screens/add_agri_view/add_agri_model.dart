@@ -3,8 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:sugar_mill_app/constants.dart';
 import 'package:sugar_mill_app/models/agri.dart';
+import 'package:sugar_mill_app/views/agriculture_screens/list_agri_view/list_agri_screen.dart';
 import '../../../models/agri_cane_model.dart';
 import '../../../models/cane_farmer.dart';
 import '../../../models/dose_type.dart';
@@ -152,7 +154,7 @@ villagelist=await AddAgriServices().fetchVillages();
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+           Navigator.pop(context, const MaterialRoute(page: ListAgriScreen));  
           }
         }
       } else {
@@ -161,7 +163,7 @@ villagelist=await AddAgriServices().fetchVillages();
           if (context.mounted) {
             setBusy(false);
             setBusy(false);
-            Navigator.pop(context);
+            Navigator.pop(context, const MaterialRoute(page: ListAgriScreen));  
           }
         }
       }
@@ -276,6 +278,16 @@ calculatebaseAmount();
   void validateForm(BuildContext context, int index) async {
     final formState = bankformKey.currentState;
     if (formState!.validate()) {
+      if (grantor.any((grantor) => grantor.suretyExistingCode == suretyExistingCode)) {
+      Fluttertoast.showToast(
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+          msg: "Grantor already exists",
+          toastLength: Toast.LENGTH_LONG
+      );
+      return;
+    }
       // Form is valid, submit it
       setBusy(true);
       submitBankAccount(index);
@@ -292,6 +304,16 @@ calculatebaseAmount();
   void validateAgriForm2(BuildContext context, int index) async {
     final formState = agriformKey.currentState;
     if (formState!.validate()) {
+       if (agricultureDevelopmentItem2.any((item) => item.itemCode == itemCode)) {
+      Fluttertoast.showToast(
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+          msg: "This item already exists",
+          toastLength: Toast.LENGTH_LONG
+      );
+      return;
+    }
       // Form is valid, submit it
       setBusy(true);
       submitAgriAccount2(index);
@@ -600,9 +622,9 @@ String? selectedVillage;
           backgroundColor: Colors.red,
           content: Text(
             'There is no cane registration available for ${agridata.village}',
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
-          duration: Duration(seconds: 3), // Adjust the duration as needed
+          duration: const Duration(seconds: 3), // Adjust the duration as needed
         ),
       );
     }
@@ -761,6 +783,7 @@ String? selectedVillage;
       return 'please select Supplier';
     }
     return null;}
+    return null;
   }
 
   String? validateSupplierName(String? value) {

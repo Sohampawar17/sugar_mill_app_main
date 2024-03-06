@@ -11,7 +11,7 @@ import '../constants.dart';
 import '../models/village_model.dart';
 
 class AddCaneService {
-  Future<bool> addCane(Cane cane) async {
+  Future<String> addCane(Cane cane) async {
     var data = json.encode({
       "data": cane,
     });
@@ -29,19 +29,21 @@ class AddCaneService {
 
       if (response.statusCode == 200) {
         String name = response.data['data']['name'].toString();
+       
+        Logger().i(response.data);
         Logger().i(name);
         await AddCaneService().methodcall(name);
         Fluttertoast.showToast(msg: "Cane Registerted Successfully");
-        return true;
+        return name;
       } else {
         Fluttertoast.showToast(msg: "UNABLE TO Cane registration!");
-        return false;
+        return "";
       }
     } on DioException catch (e) {
       Fluttertoast.showToast(msg: "Error accoured $e ");
       Logger().e(e.response?.data["exception"]);
     }
-    return false;
+    return "";
   }
 
 

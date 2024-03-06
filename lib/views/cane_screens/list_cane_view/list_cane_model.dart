@@ -49,6 +49,11 @@ class ListCaneModel extends BaseViewModel {
     notifyListeners();
   }
 
+Future<void> refresh() async {
+   canefilterList= (await ListCaneService().getAllCaneList()).cast<CaneListModel>();
+  notifyListeners();
+}
+
   void filterListByNameAndVillage({String? season,String? name, String? village}) async {
     caneseasonFilter=season ?? caneseasonFilter;
     caneNameFilter = name ?? caneNameFilter;

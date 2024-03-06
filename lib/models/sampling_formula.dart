@@ -36,17 +36,17 @@ class samplingformula {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['minimum_brix'] = this.minimumBrix;
-    data['maximum_brix'] = this.maximumBrix;
-    data['minimum_pairs'] = this.minimumPairs;
-    data['maximum_pairs'] = this.maximumPairs;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['minimum_brix'] = minimumBrix;
+    data['maximum_brix'] = maximumBrix;
+    data['minimum_pairs'] = minimumPairs;
+    data['maximum_pairs'] = maximumPairs;
+    data['doctype'] = doctype;
     return data;
   }
 }

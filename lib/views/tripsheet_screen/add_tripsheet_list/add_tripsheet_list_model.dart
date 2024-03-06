@@ -31,6 +31,12 @@ class ListTripsheet extends BaseViewModel {
     notifyListeners();
   }
 
+Future<void> refresh() async {
+   tripSheetFilter= (await ListTripshhetService().getAllTripsheetList())
+        .cast<TripSheetSearch>();
+  notifyListeners();
+}
+
   void filterList(String filter, int query) async {
     notifyListeners();
     tripSheetFilter =

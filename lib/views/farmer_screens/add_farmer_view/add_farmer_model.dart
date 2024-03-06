@@ -116,8 +116,7 @@ class FarmerViewModel extends BaseViewModel {
     //   Fluttertoast.showToast(msg: "Can not edit approved document!");
     //   return;
     // }
-    Logger().i(farmerData.aadhaarCard);
-    Logger().i(files.adharCard);
+ 
     if(isEdit==true){if(farmerData.aadhaarCard== null && files.adharCard == null){
 
       Fluttertoast.showToast(msg: "Please upload aadhaar card");
@@ -153,7 +152,8 @@ class FarmerViewModel extends BaseViewModel {
       bool res = false;
       if (isEdit == true) {
         Logger().i(farmerData.workflowState);
-if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ farmerData.workflowState = "Pending For Agriculture Officer";}else{ farmerData.workflowState = "Pending";}
+if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved"||farmerData.workflowState=="Rejected" ){ farmerData.workflowState = "Pending For Agriculture Officer";}
+if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
 
 
         Logger().i(farmerData.toJson());
@@ -488,7 +488,7 @@ if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ fa
   //     // _navigationService.navigateTo(NextScreenRoute, arguments: _selectedRole);
   //   }
   // }
-
+ bool isLoading = false;
   bool transporter = false;
   bool harvester = false;
   bool farmer = false;
@@ -725,6 +725,18 @@ if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ fa
     return null;
   }
 
+ String? validateAge(String? value) {
+   if (value == null || value.isEmpty) {
+      return 'Please Enter Age';
+    }
+    if (value.length==3) {
+      return 'Please Enter Valid Age';
+    }
+    Logger().i(value.length);
+    return null;
+    
+  }
+
   String? validatename(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter the vendor name';
@@ -771,6 +783,16 @@ if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ fa
     }
     final formState = bankformKey.currentState;
     if (formState!.validate()) {
+       if (bankAccounts.any((account) => account.accountNumber == accountNumber)) {
+      Fluttertoast.showToast(
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+          msg: "Account number already exists",
+          toastLength: Toast.LENGTH_LONG
+      );
+      return;
+    }
       // Form is valid, submit it
       if (index == -1) {
         if (!isRoleAlreadyPresent(bankName)) {
@@ -779,10 +801,10 @@ if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ fa
           return;
         }
       }
-      setBusy(false);
+      isLoading=true;
       await uploadpassbook(index);
       submitBankAccount(index);
-      setBusy(false);
+     isLoading=false;
       if (context.mounted) {
         Navigator.pop(context);
       }
@@ -794,6 +816,7 @@ if(farmerData.workflowState=="New" || farmerData.workflowState=="Approved" ){ fa
       // Form is invalid, show error messages
       Logger().i('Bank Form is invalid');
     }
+    notifyListeners();
   }
 
   bool getRoleValue(String role, int index) {

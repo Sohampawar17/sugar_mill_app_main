@@ -63,26 +63,26 @@ class Checkin {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['employee'] = this.employee;
-    data['employee_name'] = this.employeeName;
-    data['log_type'] = this.logType;
-    data['shift'] = this.shift;
-    data['time'] = this.time;
-    data['device_id'] = this.deviceId;
-    data['skip_auto_attendance'] = this.skipAutoAttendance;
-    data['shift_start'] = this.shiftStart;
-    data['shift_end'] = this.shiftEnd;
-    data['shift_actual_start'] = this.shiftActualStart;
-    data['shift_actual_end'] = this.shiftActualEnd;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['employee'] = employee;
+    data['employee_name'] = employeeName;
+    data['log_type'] = logType;
+    data['shift'] = shift;
+    data['time'] = time;
+    data['device_id'] = deviceId;
+    data['skip_auto_attendance'] = skipAutoAttendance;
+    data['shift_start'] = shiftStart;
+    data['shift_end'] = shiftEnd;
+    data['shift_actual_start'] = shiftActualStart;
+    data['shift_actual_end'] = shiftActualEnd;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['doctype'] = doctype;
     return data;
   }
 }

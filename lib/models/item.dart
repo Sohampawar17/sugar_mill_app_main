@@ -12,10 +12,10 @@ class Item {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['item_code'] = this.itemCode;
-    data['item_name'] = this.itemName;
-    data['standard_rate'] = this.standardRate;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['item_code'] = itemCode;
+    data['item_name'] = itemName;
+    data['standard_rate'] = standardRate;
     return data;
   }
 }

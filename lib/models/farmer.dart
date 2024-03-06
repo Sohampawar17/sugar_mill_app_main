@@ -27,6 +27,7 @@ class Farmer {
   String? village;
   String? circleOffice;
   String? taluka;
+  int? readOnlyCount;
   String? state;
   String? aadhaarCard;
   String? panCard;
@@ -70,6 +71,7 @@ class Farmer {
       this.isHarvester,
       this.isFarmer,
       this.isMember,
+      this.readOnlyCount,
         this.drip,
         this.nursery,
       this.village,
@@ -113,6 +115,7 @@ class Farmer {
     gender = json['gender'];
     age = json['age'];
     country = json['country'];
+    readOnlyCount=json['read_only_count'];
     supplierGroup = json['supplier_group'];
     isTransporter = json['is_transporter'];
     isHarvester = json['is_harvester'];
@@ -169,6 +172,7 @@ class Farmer {
     data['existing_supplier_code'] = existingSupplierCode;
     data['gender'] = gender;
     data['age'] = age;
+    data['read_only_count']=readOnlyCount;
     data['country'] = country;
     data['supplier_group'] = supplierGroup;
     data['is_transporter'] = isTransporter;
@@ -285,31 +289,31 @@ class BankDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['creation'] = this.creation;
-    data['modified'] = this.modified;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['farmer'] = this.farmer;
-    data['harvester'] = this.harvester;
-    data['transporter'] = this.transporter;
-    data['drip'] = this.drip;
-    data['nursery'] = this.nursery;
-    data['bank_name'] = this.bankName;
-    data['branchifsc_code'] = this.branchifscCode;
-    data['account_number'] = this.accountNumber;
-    data['status'] = this.status;
-    data['is_active'] = this.isActive;
-    data['created_datename'] = this.createdDatename;
-    data['bank_and_branch'] = this.bankAndBranch;
-    data['bank_passbook'] = this.bankPassbook;
-    data['parent'] = this.parent;
-    data['parentfield'] = this.parentfield;
-    data['parenttype'] = this.parenttype;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['creation'] = creation;
+    data['modified'] = modified;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['farmer'] = farmer;
+    data['harvester'] = harvester;
+    data['transporter'] = transporter;
+    data['drip'] = drip;
+    data['nursery'] = nursery;
+    data['bank_name'] = bankName;
+    data['branchifsc_code'] = branchifscCode;
+    data['account_number'] = accountNumber;
+    data['status'] = status;
+    data['is_active'] = isActive;
+    data['created_datename'] = createdDatename;
+    data['bank_and_branch'] = bankAndBranch;
+    data['bank_passbook'] = bankPassbook;
+    data['parent'] = parent;
+    data['parentfield'] = parentfield;
+    data['parenttype'] = parenttype;
+    data['doctype'] = doctype;
     return data;
   }
 }

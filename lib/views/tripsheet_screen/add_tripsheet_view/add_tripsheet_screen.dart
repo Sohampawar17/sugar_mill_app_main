@@ -470,7 +470,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                   return const Iterable<String>.empty();
                                 }
                                 return model.transportList
-                                    .map((grower) => grower.transporterName.toString())
+                                    .map((grower) => grower.oldNo.toString())
                                     .toList()
                                     .where((grower) => grower
                                         .toLowerCase()
@@ -480,7 +480,7 @@ class AddTripsheetScreen extends StatelessWidget {
                               onSelected: (String routeName) {
                                 // Find the corresponding route object
                                 final routeData = model.transportList.firstWhere(
-                                        (route) => route.transporterName == routeName);
+                                        (route) => route.oldNo == routeName);
                                 model.setSelectedTransCode(
                                     routeData.oldNo); // Pass the route
                               },
@@ -489,7 +489,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                   FocusNode focusNode,
                                   VoidCallback onFieldSubmitted) {
                                 return TextFormField(
-
+ keyboardType: const TextInputType.numberWithOptions(signed: true),
                                   controller: textEditingController,
                                   focusNode: focusNode,
                                   decoration: const InputDecoration(
@@ -518,7 +518,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                               options.elementAt(index);
                                           final routeData = model.transportList
                                               .firstWhere((route) =>
-                                                  route.transporterName.toString() ==
+                                                  route.oldNo.toString() ==
                                                   option);
                                           return GestureDetector(
                                             onTap: () {
@@ -527,7 +527,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                             child: ListTile(
                                               title: Text(option),
                                               subtitle: Text(
-                                                  routeData.oldNo.toString()),
+                                                  routeData.transporterName.toString()),
                                             ),
                                           );
                                         },
@@ -589,7 +589,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                   return const Iterable<String>.empty();
                                 }
                                 return model.transportList
-                                    .map((grower) => grower.harvesterName.toString())
+                                    .map((grower) => grower.oldNo.toString())
                                     .toList()
                                     .where((grower) => grower
                                         .toLowerCase()
@@ -599,7 +599,7 @@ class AddTripsheetScreen extends StatelessWidget {
                               onSelected: (String routeName) {
                                 // Find the corresponding route object
                                 final routeData = model.transportList.firstWhere(
-                                        (route) => route.harvesterName == routeName);
+                                        (route) => route.oldNo == routeName);
                                 model.setSelectedHarCode(
                                     routeData.oldNo); // Pass the route
                               },
@@ -609,7 +609,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                   FocusNode focusNode,
                                   VoidCallback onFieldSubmitted) {
                                 return TextFormField(
-
+ keyboardType: const TextInputType.numberWithOptions(signed: true),
                                   controller: textEditingController,
                                   focusNode: focusNode,
                                   decoration: const InputDecoration(
@@ -638,7 +638,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                               options.elementAt(index);
                                           final routeData = model.transportList
                                               .firstWhere((route) =>
-                                                  route.harvesterName.toString() ==
+                                                  route.oldNo.toString() ==
                                                   option);
                                           return GestureDetector(
                                             onTap: () {
@@ -647,7 +647,7 @@ class AddTripsheetScreen extends StatelessWidget {
                                             child: ListTile(
                                               title: Text(option),
                                               subtitle: Text(
-                                                  routeData.oldNo.toString()),
+                                                  routeData.harvesterName.toString()),
                                             ),
                                           );
                                         },

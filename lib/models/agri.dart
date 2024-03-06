@@ -139,78 +139,78 @@ class Agri {
       agricultureDevelopmentItem = <AgricultureDevelopmentItem>[];
       json['agriculture_development_item'].forEach((v) {
         agricultureDevelopmentItem!
-            .add(new AgricultureDevelopmentItem.fromJson(v));
+            .add( AgricultureDevelopmentItem.fromJson(v));
       });
     }
     if (json['agriculture_development_item2'] != null) {
       agricultureDevelopmentItem2 = <AgricultureDevelopmentItem2>[];
       json['agriculture_development_item2'].forEach((v) {
         agricultureDevelopmentItem2!
-            .add(new AgricultureDevelopmentItem2.fromJson(v));
+            .add( AgricultureDevelopmentItem2.fromJson(v));
       });
     }
     if (json['grantor'] != null) {
       grantor = <Grantor>[];
       json['grantor'].forEach((v) {
-        grantor!.add(new Grantor.fromJson(v));
+        grantor!.add( Grantor.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['creation'] = this.creation;
-    data['modified'] = this.modified;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['sales_type'] = this.salesType;
-    data['season'] = this.season;
-    data['cane_registration_id'] = this.caneRegistrationId;
-    data['supplier'] = this.supplier;
-    data['vendor_code'] = this.vendorCode;
-    data['grower_name'] = this.growerName;
-    data['nursery_supplier'] = this.nurserySupplier;
-    data['supplier_name'] = this.supplierName;
-    data['branch'] = this.branch;
-    data['village'] = this.village;
-    data['crop_type'] = this.cropType;
-    data['crop_variety'] = this.cropVariety;
-    data['date'] = this.date;
-    data['area'] = this.area;
-    data['development_area'] = this.developmentArea;
-    data['route'] = this.route;
-    data['basel'] = this.basel;
-    data['pre_earthing'] = this.preEarthing;
-    data['earth'] = this.earth;
-    data['rainy'] = this.rainy;
-    data['ratoon_1'] = this.ratoon1;
-    data['ratoon_2'] = this.ratoon2;
-    data['total'] = this.total;
-    data['basel_total'] = this.baselTotal;
-    data['pre_earthing_total'] = this.preEarthingTotal;
-    data['earth_total'] = this.earthTotal;
-    data['rainy_total'] = this.rainyTotal;
-    data['ratoon_1_total'] = this.ratoon1Total;
-    data['ratoon_2_total'] = this.ratoon2Total;
-    data['total_weight']=this.totalWeight;
-    data['total_gst_amount']=this.totalGstAmount;
-    data['total_base_amount']=this.totalBaseAmount;
-    data['total_amount']=this.totalAmount;
-    data['creator_name'] = this.creatorName;
-    data['doctype'] = this.doctype;
-    if (this.agricultureDevelopmentItem != null) {
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['creation'] = creation;
+    data['modified'] = modified;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['sales_type'] = salesType;
+    data['season'] = season;
+    data['cane_registration_id'] = caneRegistrationId;
+    data['supplier'] = supplier;
+    data['vendor_code'] = vendorCode;
+    data['grower_name'] = growerName;
+    data['nursery_supplier'] = nurserySupplier;
+    data['supplier_name'] = supplierName;
+    data['branch'] = branch;
+    data['village'] = village;
+    data['crop_type'] = cropType;
+    data['crop_variety'] = cropVariety;
+    data['date'] = date;
+    data['area'] = area;
+    data['development_area'] = developmentArea;
+    data['route'] = route;
+    data['basel'] = basel;
+    data['pre_earthing'] = preEarthing;
+    data['earth'] = earth;
+    data['rainy'] = rainy;
+    data['ratoon_1'] = ratoon1;
+    data['ratoon_2'] = ratoon2;
+    data['total'] = total;
+    data['basel_total'] = baselTotal;
+    data['pre_earthing_total'] = preEarthingTotal;
+    data['earth_total'] = earthTotal;
+    data['rainy_total'] = rainyTotal;
+    data['ratoon_1_total'] = ratoon1Total;
+    data['ratoon_2_total'] = ratoon2Total;
+    data['total_weight']=totalWeight;
+    data['total_gst_amount']=totalGstAmount;
+    data['total_base_amount']=totalBaseAmount;
+    data['total_amount']=totalAmount;
+    data['creator_name'] = creatorName;
+    data['doctype'] = doctype;
+    if (agricultureDevelopmentItem != null) {
       data['agriculture_development_item'] =
-          this.agricultureDevelopmentItem!.map((v) => v.toJson()).toList();
+          agricultureDevelopmentItem!.map((v) => v.toJson()).toList();
     }
-    if (this.agricultureDevelopmentItem2 != null) {
+    if (agricultureDevelopmentItem2 != null) {
       data['agriculture_development_item2'] =
-          this.agricultureDevelopmentItem2!.map((v) => v.toJson()).toList();
+          agricultureDevelopmentItem2!.map((v) => v.toJson()).toList();
     }
-    if (this.grantor != null) {
-      data['grantor'] = this.grantor!.map((v) => v.toJson()).toList();
+    if (grantor != null) {
+      data['grantor'] = grantor!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -311,36 +311,36 @@ class AgricultureDevelopmentItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['creation'] = this.creation;
-    data['modified'] = this.modified;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['item_code'] = this.itemCode;
-    data['item_name'] = this.itemName;
-    data['basel'] = this.basel;
-    data['pre_earthing'] = this.preEarthing;
-    data['earth'] = this.earth;
-    data['rainy'] = this.rainy;
-    data['ratoon_1'] = this.ratoon1;
-    data['ratoon_2'] = this.ratoon2;
-    data['qty'] = this.qty;
-    data['description'] = this.description;
-    data['stock_uom'] = this.stockUom;
-    data['actual_qty'] = this.actualQty;
-    data['rate'] = this.rate;
-    data['item_tax_temp'] = this.itemTaxTemp;
-    data['weight_per_unit'] = this.weightPerUnit;
-    data['total_weight']=this.totalWeight;
-    data['weight_uom'] = this.weightUom;
-    data['base_amount'] = this.baseAmount;
-    data['parent'] = this.parent;
-    data['parentfield'] = this.parentfield;
-    data['parenttype'] = this.parenttype;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['creation'] = creation;
+    data['modified'] = modified;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['item_code'] = itemCode;
+    data['item_name'] = itemName;
+    data['basel'] = basel;
+    data['pre_earthing'] = preEarthing;
+    data['earth'] = earth;
+    data['rainy'] = rainy;
+    data['ratoon_1'] = ratoon1;
+    data['ratoon_2'] = ratoon2;
+    data['qty'] = qty;
+    data['description'] = description;
+    data['stock_uom'] = stockUom;
+    data['actual_qty'] = actualQty;
+    data['rate'] = rate;
+    data['item_tax_temp'] = itemTaxTemp;
+    data['weight_per_unit'] = weightPerUnit;
+    data['total_weight']=totalWeight;
+    data['weight_uom'] = weightUom;
+    data['base_amount'] = baseAmount;
+    data['parent'] = parent;
+    data['parentfield'] = parentfield;
+    data['parenttype'] = parenttype;
+    data['doctype'] = doctype;
     return data;
   }
 }
@@ -407,25 +407,25 @@ class AgricultureDevelopmentItem2 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['creation'] = this.creation;
-    data['modified'] = this.modified;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['item_code'] = this.itemCode;
-    data['item_name'] = this.itemName;
-    data['qty'] = this.qty;
-    data['rate'] = this.rate;
-    data['stock_uom'] = this.stockUom;
-    data['description'] = this.description;
-    data['amount'] = this.amount;
-    data['parent'] = this.parent;
-    data['parentfield'] = this.parentfield;
-    data['parenttype'] = this.parenttype;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['creation'] = creation;
+    data['modified'] = modified;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['item_code'] = itemCode;
+    data['item_name'] = itemName;
+    data['qty'] = qty;
+    data['rate'] = rate;
+    data['stock_uom'] = stockUom;
+    data['description'] = description;
+    data['amount'] = amount;
+    data['parent'] = parent;
+    data['parentfield'] = parentfield;
+    data['parenttype'] = parenttype;
+    data['doctype'] = doctype;
     return data;
   }
 }
@@ -483,22 +483,22 @@ class Grantor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['owner'] = this.owner;
-    data['creation'] = this.creation;
-    data['modified'] = this.modified;
-    data['modified_by'] = this.modifiedBy;
-    data['docstatus'] = this.docstatus;
-    data['idx'] = this.idx;
-    data['surety_code'] = this.suretyCode;
-    data['surety_name'] = this.suretyName;
-    data['surety_existing_code'] = this.suretyExistingCode;
-    data['village'] = this.village;
-    data['parent'] = this.parent;
-    data['parentfield'] = this.parentfield;
-    data['parenttype'] = this.parenttype;
-    data['doctype'] = this.doctype;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['name'] = name;
+    data['owner'] = owner;
+    data['creation'] = creation;
+    data['modified'] = modified;
+    data['modified_by'] = modifiedBy;
+    data['docstatus'] = docstatus;
+    data['idx'] = idx;
+    data['surety_code'] = suretyCode;
+    data['surety_name'] = suretyName;
+    data['surety_existing_code'] = suretyExistingCode;
+    data['village'] = village;
+    data['parent'] = parent;
+    data['parentfield'] = parentfield;
+    data['parenttype'] = parenttype;
+    data['doctype'] = doctype;
     return data;
   }
 }
