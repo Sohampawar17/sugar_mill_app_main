@@ -135,10 +135,11 @@ class _LoginViewScreenState extends State<LoginViewScreen> {
                                         child: TextFormField(
                                           controller: model.usernameController,
                                           focusNode: model.focusNode,
-                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [LengthLimitingTextInputFormatter(10)],                                          keyboardType: TextInputType.phone,
                                           decoration: InputDecoration(
-                                            labelText: 'Username',
+                                            labelText: 'Mobile Number',
                                             filled: true,
+                                            hintText: 'Enter the mobile number',
                                             fillColor: Colors.white,
                                             border: OutlineInputBorder(
                                               borderRadius:
@@ -168,6 +169,7 @@ class _LoginViewScreenState extends State<LoginViewScreen> {
                                             bottom: 0),
                                         //padding: EdgeInsets.symmetric(horizontal: 15),
                                         child: TextFormField(
+                                          keyboardType: TextInputType.visiblePassword,
                                           controller: model.passwordController,
                                           obscureText: model.obscurePassword,
                                           decoration: InputDecoration(

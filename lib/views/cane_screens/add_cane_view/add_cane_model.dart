@@ -138,7 +138,7 @@ void showSuccessDialog(BuildContext context,String? name) {
     MaterialPageRoute(builder: (context) => const ListCaneScreen()),
   ); // Close the dialog
             },
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       );

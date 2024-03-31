@@ -27,7 +27,7 @@ class AgriListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
+    final Map<String, dynamic> data =  <String, dynamic>{};
     data['crop_type'] = cropType;
     data['crop_variety'] = cropVariety;
     data['date'] = date;

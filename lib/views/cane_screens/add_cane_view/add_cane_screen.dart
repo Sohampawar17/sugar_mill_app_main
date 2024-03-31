@@ -542,9 +542,9 @@ class AddCaneScreen extends StatelessWidget {
   onChanged: model.setsurveyNumber,
   inputFormatters: [
     FilteringTextInputFormatter.allow(
-      RegExp(r'^[0-9./-]*$'), // Allow only numbers, '/', '.', and '-'
+      RegExp(r'[0-9@#$%^&8()_+={}[/]|\\:;"\<>,.?/-]'), // Allow only numbers, '/', '.', and '-'
     ),
-    FilteringTextInputFormatter.digitsOnly
+    
   ],
 ),
 
@@ -662,7 +662,7 @@ class AddCaneScreen extends StatelessWidget {
                                       DropdownButtonFormField<String>(
                                     isExpanded: true,
                                     value: model.canedata.plantationSystem,
-                                    // Replace null with the selected value if needed
+                        
                                     decoration: const InputDecoration(
                                       labelText: 'Plantation System *',
                                     ),
@@ -794,13 +794,8 @@ class AddCaneScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: TextFormField(
-                                  inputFormatters: [
-    FilteringTextInputFormatter.deny(
-      RegExp(r'^[A-Z a-z]'), // Allow only numbers, '/', '.', and '-'
-    ),
 
-  ],
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                   controller: model.areainAcrsController,
                                   decoration: const InputDecoration(
                                     labelText: 'Area In Acrs *',

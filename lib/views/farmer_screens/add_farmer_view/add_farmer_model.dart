@@ -360,7 +360,7 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
     }
   }
 
-  String errorMessage = '';
+String errorMessage = '';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// for gender //////////////////////////////////////////////////
@@ -393,12 +393,14 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
     notifyListeners();
   }
 
+
   String? selectedVendorGroup;
   void setSelectedVendorGroup(String? vender) {
     selectedVendorGroup = vender;
     farmerData.supplierGroup = vender;
     notifyListeners();
   }
+
 
   String? selectedVillage;
   String? selectedoffice;
@@ -474,6 +476,7 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
   //   notifyListeners();
   // }
   // final List<String> roles = ['Transporter'];
+  
   Set<String> selectedRoleforservice = <String>{};
   String? _selectedRole;
 
@@ -488,6 +491,7 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
   //     // _navigationService.navigateTo(NextScreenRoute, arguments: _selectedRole);
   //   }
   // }
+
  bool isLoading = false;
   bool transporter = false;
   bool harvester = false;
@@ -645,6 +649,7 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
     } catch (e) {
       Fluttertoast.showToast(
           msg: 'Error while picking an image or document: $e');
+          Logger().e(e);
     }
     notifyListeners();
   }
@@ -772,52 +777,67 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
     return null;
   }
 
-  void validateForm(BuildContext context, int index) async {
-    // if (farmerData.workflowState == "Approved") {
-    //   Fluttertoast.showToast(msg: "Can not edit Approved document");
-    //   return;
-    // }
-    if (passbookattch == "") {
-      Fluttertoast.showToast(msg: "Please attach the passbook");
-      return;
-    }
-    final formState = bankformKey.currentState;
-    if (formState!.validate()) {
-       if (bankAccounts.any((account) => account.accountNumber == accountNumber)) {
+  Future<void> validateForm(BuildContext context, int index) async {
+
+    if (bankAccounts.any((account) => account.accountNumber == accountNumber && idbankedit == false)) {
       Fluttertoast.showToast(
         gravity: ToastGravity.CENTER,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-          msg: "Account number already exists",
-          toastLength: Toast.LENGTH_LONG
+        msg: "Account number already exists",
+        toastLength: Toast.LENGTH_LONG,
       );
       return;
     }
-      // Form is valid, submit it
-      if (index == -1) {
-        if (!isRoleAlreadyPresent(bankName)) {
-          Fluttertoast.showToast(
-              msg: "Role is already exist", toastLength: Toast.LENGTH_LONG);
-          return;
-        }
+
+    if (bankAccounts.any((account) => account.bankPassbook == passbookattch && idbankedit == false)) {
+      Fluttertoast.showToast(
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        msg: "Passbook attachment already exists",
+        toastLength: Toast.LENGTH_LONG,
+      );
+      return;
+    }
+
+    if (index == -1) {
+      if (!isRoleAlreadyPresent(bankName)) {
+        Fluttertoast.showToast(
+          msg: "Role is already exist",
+          toastLength: Toast.LENGTH_LONG,
+        );
+        return;
       }
-      isLoading=true;
+    }
+
+    setBusy(true); // Set the loading state
+ Navigator.pop(context);
+    try {
       await uploadpassbook(index);
       submitBankAccount(index);
-     isLoading=false;
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
+    setBusy(false);
+//  if (context.mounted) {
+//         Navigator.pop(context);
+//       }
       Fluttertoast.showToast(
-          msg: "Bank is Added Succesfully", toastLength: Toast.LENGTH_LONG);
+         gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+          msg:idbankedit==true ?"Bank is edited succesfully":'Bank is added successfully', toastLength: Toast.LENGTH_LONG);
       resetBankVariables();
       passbookattch = "";
-    } else {
-      // Form is invalid, show error messages
-      Logger().i('Bank Form is invalid');
+      // Reset state variables, dismiss dialog, show toast, etc.
+
+    } catch (e) {
+      Logger().e(e);
+       setBusy(false);
+      // Handle any errors here...
+    } finally {
+      setBusy(false); // Set the loading state
     }
-    notifyListeners();
-  }
+  
+}
 
   bool getRoleValue(String role, int index) {
     if (index >= 0 && index < bankAccounts.length) {
@@ -889,12 +909,13 @@ if(farmerData.workflowState=="Pending"){farmerData.workflowState = "Pending";}
         bankPassbook: passbookattch));
     notifyListeners();
   }
-
+bool idbankedit=false;
   void setValuesToBankVaribles(int index) {
     if (index != -1) {
       if (index >= bankAccounts.length) {
         return;
       }
+      idbankedit=true;
       // Reset all roles to false
       farmer = false;
       harvester = false;
@@ -926,6 +947,7 @@ nursery=false;
   }
 
   void resetBankVariables() {
+    idbankedit=false;
     farmer = false;
     harvester = false;
     transporter = false;
@@ -973,9 +995,7 @@ nursery=false;
     if (value!.isEmpty) {
       return 'Please enter a branch IFSC code';
     }
-    if (value.length != 11) {
-      return 'The branch IFSC code must be 11 characters long';
-    }
+   
     return null;
   }
 

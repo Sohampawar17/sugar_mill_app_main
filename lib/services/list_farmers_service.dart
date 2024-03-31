@@ -71,13 +71,15 @@ class ListFarmersService {
 
   Future<List<FarmersListModel>> getFarmersListByNameFilter(
       String name, String village) async {
-        var url="";
+        
+        var url=  "$apiBaseUrl/api/method/sugar_mill.sugar_mill.doctype.farmer_list.farmer_list.filterfarmerlist?village=$village&name=$name";
+   Logger().i(url);
     try {
       var headers = {'Cookie': await getTocken()};
       var dio = Dio();
       var response = await dio.request(
-        "$apiBaseUrl/api/resource/Farmer List?fields=[\"supplier_name\",\"village\",\"name\",\"circle_office\",\"existing_supplier_code\",\"workflow_state\"]&filters=[[\"village\",  \"like\", \"$village%\" ],[\"supplier_name\",  \"like\", \"%$name%\" ]]&limit_page_length=9999999",
-        options: Options(
+        url,
+             options: Options(
           method: 'GET',
           headers: headers,
         ),
@@ -85,7 +87,7 @@ class ListFarmersService {
 
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonData = json.decode(json.encode(response.data));
-        List<FarmersListModel> farmersList = List.from(jsonData['data'])
+        List<FarmersListModel> farmersList = List.from(jsonData['message'])
             .map<FarmersListModel>((data) => FarmersListModel.fromJson(data))
             .toList();
         return farmersList;

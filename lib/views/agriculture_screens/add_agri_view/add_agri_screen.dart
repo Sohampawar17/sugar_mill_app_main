@@ -481,7 +481,7 @@ validator: model.validateSupplier,
                         children: [
                           Expanded(
                               child: TextFormField(
-                            keyboardType: TextInputType.number,
+                                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                             controller: model.developmentAreaController,
                             decoration: InputDecoration(
                               labelText: 'Development Area *',

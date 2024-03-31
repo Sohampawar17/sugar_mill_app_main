@@ -428,6 +428,7 @@ class AddTripsheetScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: TextFormField(
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                               controller: model.deductionController,
                               // onTap: () => model.selectDate(context),
                               decoration: const InputDecoration(
@@ -894,7 +895,7 @@ class AddTripsheetScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextFormField(
-                                keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                                 controller: model.watershareController,
                                 decoration: const InputDecoration(
                                   labelText: 'Water Share(%)',

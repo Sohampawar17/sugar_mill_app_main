@@ -148,7 +148,7 @@ Future<File?> compressFile(File file) async {
 
   // Create a new file name with the extension "_compressed".
   final compressedFileName =
-      filePath.replaceAll(fileExtension, '_compressed.$fileExtension');
+      filePath.replaceAll(fileExtension, '_compressed.jpeg');
 
   var result = await FlutterImageCompress.compressAndGetFile(
     file.absolute.path,
